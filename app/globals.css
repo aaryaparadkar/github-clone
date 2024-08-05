@@ -1,4 +1,12 @@
 :root {
+  --bgblue: rgb(11, 0, 85);
+  --bgblack: rgb(2, 0, 34);
+  --font: rgb(224, 224, 224);
+  --divider: rgb(79, 79, 207);
+  --button: rgba(8, 0, 42, 0.389);
+  --aqua: #1ecbe1;
+  --font-lucida: "Lucida Console", "Courier New", monospace;
+
   --max-width: 1100px;
   --border-radius: 12px;
   --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",

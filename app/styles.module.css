@@ -1,0 +1,166 @@
+.backgroundDiv {
+  min-height: 100vh;
+  height: auto;
+  background-image: linear-gradient(var(--bgblue), var(--bgblack));
+  color: var(--font);
+  font-family: "Lucida Console", "Courier New", monospace;
+  display: flex;
+  flex-direction: column;
+}
+
+.Header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 15px;
+}
+
+.ProfileImg {
+  border-radius: 50%;
+  zoom: 50%;
+}
+
+.Header .HeaderChild1 {
+  display: flex;
+  gap: 70px;
+  justify-content: center;
+  align-items: center;
+  margin-left: 100px;
+}
+
+.Header .HeaderChild2 {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  padding-right: 100px;
+}
+
+.Header .HeaderChild2 .ConnectButton,
+.LoginButton,
+.WithdrawButton,
+.ForkButton,
+.BranchOptions {
+  width: 150px;
+  height: 50px;
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  background: var(--button);
+  border: 0.5px solid var(--divider);
+  font-size: 16px;
+  color: var(--font);
+  font-family: "Lucida Console", "Courier New", monospace;
+  cursor: pointer;
+}
+
+.CodeTable,
+.IssuesTable {
+  background: var(--button);
+  border: 0.5px solid var(--divider);
+  font-size: 16px;
+  color: var(--font);
+  font-family: "Lucida Console", "Courier New", monospace;
+  margin: 1rem 3rem;
+  padding: 1rem;
+}
+
+.CodeTable,
+.IssuesTable {
+  padding: 1rem 3rem;
+  display: grid;
+  grid-template-columns: 70% 30%;
+  grid-template-rows: 30px auto;
+}
+
+.CodeTable div,
+.IssuesTable div {
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+}
+.IssuesTable {
+  grid-template-columns: 50% 10% 10% 10% 10% 10%;
+  grid-template-rows: 30px auto;
+}
+
+.ForkButton,
+.BranchOptions {
+  width: 100px;
+  height: 30px;
+}
+
+.Divider {
+  position: relative;
+  background-color: var(--divider);
+  width: 94vw;
+  height: 0.5px;
+  left: 3vw;
+}
+
+.main {
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  padding: 3rem 8rem;
+  color: var(--font);
+}
+
+.main .mainLeft {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 150px;
+}
+
+.main .mainRight {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.DashboardMain {
+  padding: 1rem 3rem;
+  display: grid;
+  grid-template-rows: 7vh 53vh;
+  grid-template-columns: 30% 40% 30%;
+}
+
+.DashboardMain .searchBar {
+  grid-column-start: 1;
+  grid-column-end: 4;
+  display: flex;
+  justify-content: center;
+}
+.YourReposContainer {
+  max-height: 500px;
+  margin: 1rem 2rem 30px 0;
+  padding: 10px;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.DashboardMain .MyStatsContainer {
+  max-height: 500px;
+  margin: 1rem 2rem 30px 0;
+  /* background-color: var(--button); */
+  border: 0.5px solid var(--divider);
+  padding: 10px;
+  overflow: auto;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 70px 10px 70px 70px 10px auto;
+}
+
+.DashboardMain .MyStatsContainer div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.IssueContainer {
+  display: grid;
+  grid-template-columns: 33% 0.5% 33% 0.5% 33%;
+  grid-template-rows: 30px auto;
+  padding: 1rem 3rem;
+}

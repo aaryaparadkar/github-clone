@@ -1,95 +1,34 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+
+import styles from "./styles.module.css";
+import Image from 'next/image'
+import bg from "../assets/bg3.jpeg"
+import logo from "../assets/logo3.png"
 
 export default function Home() {
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <>
+      <main className={styles.main}>
+        <div className={styles.mainLeft}>
+          <div><a style={{ color: "#1ecbe1" }}>S</a>ta<a style={{ color: "var(--divider)" }}>k</a>e. </div>
+          <div>S<a style={{ color: "var(--divider)" }}>o</a>lv<a style={{ color: "#1ecbe1" }}>e</a>. </div>
+          <div><a style={{ color: "#1ecbe1" }}>E</a>ar<a style={{ color: "var(--divider)" }}>n</a>. </div>
         </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+        <div className={styles.mainRight}>
+          <div style={{ display: "flex", justifyContent: "Center" }}><Image
+            src={logo}
+            width={250}
+            height={250}
+          />
+          </div>
+          Enter your Git Access Token <br></br>
+          <input style={{ color:"var(--divider)", fontFamily:"var(--font-lucida)", fontSize:20, height: 40 }}></input>
+          <button className={styles.LoginButton} >Log In</button>
+        </div>
+      </main>
+      <Image style={{ position: "absolute", top: 100, left: 60, opacity: 0.15, zIndex: 1, overflow: "hidden" }}
+        src={bg}
+        width={1300}
+      />
+    </>
   );
 }
