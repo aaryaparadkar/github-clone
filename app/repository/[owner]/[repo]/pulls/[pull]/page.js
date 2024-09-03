@@ -183,7 +183,7 @@
 
 "use client"
 import styles from "../../../../../styles.module.css"
-import DiscussionCard from "@/components/discussioncard"
+import DiscussionCard from "@/components/discussionCard"
 import PullReqCard from "@/components/pullRequestCard"
 import { useParams } from "next/navigation"
 import { useEffect, useState } from "react"
