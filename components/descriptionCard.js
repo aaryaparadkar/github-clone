@@ -2,11 +2,8 @@
 import profile from "../app/assets/profile1.jpg"
 import Image from "next/image"
 import styles from "../app/styles.module.css"
-import { useParams } from "next/navigation"
 
-export default function DiscussionCard({ comments }) {
-  const { owner, repo, pull } = useParams()
-  console.log(owner, repo, pull, comments)
+export default function DescriptionCard({ issue }) {
   return (
     <div
       style={{
@@ -28,13 +25,13 @@ export default function DiscussionCard({ comments }) {
       <div style={{ display: "flex", padding: 10, flexDirection: "column" }}>
         <div style={{ color: "var(--aqua)", marginBottom: 10 }}>
           {" "}
-          {comments.user?.login}{" "}
+          {issue?.user.login}{" "}
         </div>
         <div style={{ marginBottom: 10, fontSize: 12, color: "grey" }}>
           {" "}
-          27th Feb 2023{" "}
+          {new Date(issue?.created_at).toLocaleDateString()}{" "}
         </div>
-        <div>Description denay</div>
+        <div>{issue?.body}</div>
       </div>
     </div>
   )
