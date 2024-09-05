@@ -1,186 +1,3 @@
-// "use client"
-// // import SolutionCard from "@/components/SolutionCard";
-// import styles from "../../../../../styles.module.css"
-// import DiscussionCard from "@/components/discussioncard"
-// import PullReqCard from "@/components/pullRequestCard"
-// import { useParams } from "next/navigation"
-
-// export default function Pull() {
-//   const { owner, repo, pull } = useParams()
-//   console.log(pull)
-//   return (
-//     <>
-//       <div
-//         style={{
-//           display: "flex",
-//           alignItems: "center",
-//           flexDirection: "row",
-//           padding: "10px 3rem 0 3rem",
-//           fontSize: 24,
-//         }}
-//       >
-//         <div style={{ color: "var(--aqua)", paddingRight: 10 }}>
-//           #{/*PR id*/}
-//           <span
-//             style={{
-//               paddingLeft: 5,
-//               marginLeft: 5,
-//               fontSize: 16,
-//               color: "var(--font)",
-//               backgroundColor: "green",
-//               padding: 2,
-//             }}
-//           >
-//             Open
-//           </span>
-//         </div>
-//         {/*linked issue id */} {/*Title */}
-//       </div>
-//       <div
-//         style={{
-//           padding: "10px 3rem",
-//           alignItems: "center",
-//           display: "flex",
-//           flexDirection: "row",
-//         }}
-//       >
-//         Staked{" "}
-//         <div
-//           style={{
-//             border: "0.5px solid var(--divider)",
-//             backgroundColor: "rgba(8, 0, 42, 0.389)",
-//             color: "var(--aqua)",
-//             padding: 5,
-//             marginLeft: 5,
-//             marginRight: 5,
-//             fontSize: 20,
-//           }}
-//         >
-//           5 ETH
-//         </div>
-//         -
-//         <div style={{ color: "var(--aqua)", padding: 5, marginLeft: 3 }}>
-//           ManasMishra
-//         </div>
-//         wants to merge 1 commit into
-//         <div
-//           style={{
-//             backgroundColor: "rgba(8, 0, 42, 0.389)",
-//             color: "var(--aqua)",
-//             padding: 5,
-//             marginLeft: 3,
-//           }}
-//         >
-//           {/*main repo */}
-//         </div>
-//         from
-//         <div
-//           style={{
-//             backgroundColor: "rgba(8, 0, 42, 0.389)",
-//             color: "var(--aqua)",
-//             padding: 5,
-//             marginLeft: 3,
-//           }}
-//         >
-//           {/*Forked repo */}
-//         </div>
-//       </div>
-//       <div
-//         style={{
-//           height: 0.1,
-//           marginLeft: "3%",
-//           width: "94vw",
-//           backgroundColor: "var(--divider)",
-//         }}
-//       ></div>
-
-//       <div className={styles.IssueContainer}>
-//         <div
-//           style={{
-//             display: "flex",
-//             justifyContent: "center",
-//             color: "var(--aqua)",
-//           }}
-//         >
-//           Conversations
-//         </div>
-//         <div
-//           style={{
-//             height: "auto",
-//             width: 0.1,
-//             gridColumnStart: 2,
-//             gridColumnEnd: 2,
-//             gridRowStart: 1,
-//             gridRowEnd: 100,
-//             backgroundColor: "var(--divider)",
-//           }}
-//         ></div>
-
-//         <div
-//           style={{
-//             display: "flex",
-//             justifyContent: "center",
-//             color: "var(--aqua)",
-//           }}
-//         >
-//           Commits(5)
-//         </div>
-//         <div
-//           style={{
-//             height: "auto",
-//             width: 0.1,
-//             gridColumnStart: 4,
-//             gridColumnEnd: 4,
-//             gridRowStart: 1,
-//             gridRowEnd: 4,
-//             backgroundColor: "var(--divider)",
-//           }}
-//         ></div>
-
-//         <div
-//           style={{
-//             display: "flex",
-//             justifyContent: "center",
-//             color: "var(--aqua)",
-//           }}
-//         >
-//           Files Changed()
-//         </div>
-
-//         <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-//           <DiscussionCard />
-//           {/* <DiscussionCard /> */}
-//           {/* <PostDoubt /> */}
-//         </div>
-
-//         <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-//           <PullReqCard />
-//         </div>
-
-//         <div
-//           style={{
-//             paddingLeft: 40,
-//             display: "flex",
-//             flexDirection: "column",
-//             gap: 10,
-//           }}
-//         >
-//           <ol>
-//             <li>abc.js/abc/abc</li>
-//             <li>abc.js/abc/abc</li>
-//           </ol>
-//         </div>
-//       </div>
-//     </>
-
-//     // <table>
-//     //     <thead>
-//     //     19 open issues
-//     //     </thead>
-//     // </table>
-//   )
-// }
-
 "use client"
 import styles from "../../../../../styles.module.css"
 import DiscussionCard from "@/components/discussioncard"
@@ -209,18 +26,15 @@ export default function Pull() {
         const data = await response.json()
         setPullDetails(data)
 
+        // Fetch comments, commits, and files
         const commentsResponse = await fetch(data.comments_url)
-        const commentsData = await commentsResponse.json()
-        console.log(commentsData)
-        setComments(commentsData)
+        setComments(await commentsResponse.json())
 
         const commitsResponse = await fetch(data.commits_url)
-        const commitsData = await commitsResponse.json()
-        setCommits(commitsData)
+        setCommits(await commitsResponse.json())
 
-        const filesResponse = await fetch(data.url + "/files")
-        const filesData = await filesResponse.json()
-        setFilesChanged(filesData)
+        const filesResponse = await fetch(`${data.url}/files`)
+        setFilesChanged(await filesResponse.json())
       } catch (err) {
         setError(err.message)
       } finally {
@@ -264,6 +78,7 @@ export default function Pull() {
           {pullDetails.title}
         </div>
       </div>
+
       <div
         style={{
           padding: "10px 3rem",
@@ -313,6 +128,7 @@ export default function Pull() {
           {pullDetails.head.ref}
         </div>
       </div>
+
       <div
         style={{
           height: 0.1,
@@ -332,6 +148,7 @@ export default function Pull() {
         >
           Conversations
         </div>
+
         <div
           style={{
             height: "auto",
@@ -353,6 +170,7 @@ export default function Pull() {
         >
           Commits({commits.length})
         </div>
+
         <div
           style={{
             height: "auto",
@@ -376,7 +194,7 @@ export default function Pull() {
         </div>
 
         <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-          <DiscussionCard comments={comments} />
+          <DiscussionCard comments={comments} pullDetails={pullDetails} />
         </div>
 
         <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>

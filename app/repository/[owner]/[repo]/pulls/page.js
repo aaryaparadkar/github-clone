@@ -17,11 +17,12 @@ export default function PullReq() {
           `https://api.github.com/repos/${owner}/${repo}/pulls`,
         )
         if (!response.ok) {
-          throw new Error("Failed to fetch pull requests")
+          console.log("Failed to fetch pull requests")
         }
         const data = await response.json()
         console.log(data)
         setPullRequests(data)
+        console.log(pullRequests)
       } catch (err) {
         setError(err.message)
       } finally {

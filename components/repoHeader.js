@@ -4,10 +4,52 @@ import styles from "../app/styles.module.css"
 import Image from "next/image"
 import fork from "../app/assets/fork.png"
 import Link from "next/link"
+import { useState } from "react"
 
 export default function RepoHeader() {
   const { owner, repo } = useParams()
-  console.log(owner + repo)
+  const [repoName, setRepoName] = useState(repo)
+  const [isForking, setIsForking] = useState(false)
+
+  const handleFork = async () => {
+    setIsForking(true)
+
+    // Retrieve the GitHub access token from localStorage
+    const token = localStorage.getItem("githubAccessToken")
+    if (!token) {
+      console.error("GitHub access token not found.")
+      alert("Please login to your GitHub account.")
+      setIsForking(false)
+      return
+    }
+
+    try {
+      const response = await fetch(
+        `https://api.github.com/repos/${owner}/${repo}/forks`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `token ${token}`,
+            "Content-Type": "application/json",
+          },
+        },
+      )
+
+      if (response.ok) {
+        const forkedRepo = await response.json()
+        alert(`Forked successfully! New repo: ${forkedRepo.full_name}`)
+      } else {
+        const errorData = await response.json()
+        alert(`Failed to fork: ${errorData.message}`)
+      }
+    } catch (error) {
+      console.error("Error during forking:", error)
+      alert("An error occurred while forking the repository.")
+    } finally {
+      setIsForking(false)
+    }
+  }
+
   return (
     <>
       <div className={styles.Header}>
@@ -28,11 +70,16 @@ export default function RepoHeader() {
             <div>Pull Requests</div>
           </Link>
 
-          {/* <div>Fork</div> */}
+          {/* Fork button and input field */}
           <div style={{ display: "flex", gap: 3 }}>
             <Image src={fork} width={30} height={30} />
-            <button className={styles.ForkButton} style={{ width: 70 }}>
-              Fork
+            <button
+              className={styles.ForkButton}
+              style={{ width: 70 }}
+              onClick={handleFork}
+              disabled={isForking}
+            >
+              {isForking ? "Forking..." : "Fork"}
             </button>
             <input
               style={{
@@ -43,7 +90,9 @@ export default function RepoHeader() {
                 fontSize: "14px",
               }}
               placeholder="Your Repo Name..."
-            ></input>
+              value={repoName}
+              onChange={(e) => setRepoName(e.target.value)}
+            />
           </div>
         </div>
       </div>

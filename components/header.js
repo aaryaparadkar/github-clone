@@ -5,10 +5,44 @@ import profile from "../app/assets/profile1.jpg"
 import logo from "../app/assets/logo3.png"
 import { usePrivy, useWallets } from "@privy-io/react-auth"
 import Link from "next/link"
+import { useEffect, useState } from "react"
 export default function Header() {
   const { ready, authenticated, login, logout } = usePrivy()
   const { wallets } = useWallets()
+  const [user, setUser] = useState("")
   // const address = ready ? wallets[0]?.address : ""
+
+  useEffect(() => {
+    const getUser = async () => {
+      const token = localStorage.getItem("githubAccessToken")
+      if (!token) {
+        console.log("GitHub access token not found.")
+        return
+      }
+
+      try {
+        const response = await fetch(`https://api.github.com/user`, {
+          method: "GET",
+          headers: {
+            Authorization: `token ${token}`,
+          },
+        })
+
+        if (response.ok) {
+          const user = await response.json()
+          setUser(user)
+          console.log("User", user)
+        } else {
+          const errorData = await response.json()
+          console.log("Error at", errorData.message)
+        }
+      } catch (error) {
+        console.log("Error during forking:", error)
+      }
+    }
+    getUser()
+  }, [])
+
   return (
     <>
       <div className={styles.Header}>
@@ -30,7 +64,7 @@ export default function Header() {
             }}
           >
             {" "}
-            Hiii!
+            Hiii! {user ? user?.login : ""}
           </span>
           <Image
             className={styles.ProfileImg}
