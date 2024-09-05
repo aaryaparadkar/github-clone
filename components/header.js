@@ -64,7 +64,7 @@ export default function Header() {
             }}
           >
             {" "}
-            Hiii! {user ? user?.login : ""}
+            Hiii! {user ? user?.login : "User"}
           </span>
           <Image
             className={styles.ProfileImg}
