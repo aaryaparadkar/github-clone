@@ -164,3 +164,70 @@
   grid-template-rows: 30px auto;
   padding: 1rem 3rem;
 }
+
+.chatbotContainer {
+  width: 300px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+}
+
+.messagesContainer {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  background-color: #fff;
+  border-bottom: 1px solid #ccc;
+}
+
+.message {
+  margin: 5px 0;
+  padding: 8px 12px;
+  border-radius: 20px;
+  max-width: 80%;
+  font-size: 14px;
+}
+
+.userMessage {
+  background-color: #007bff;
+  color: white;
+  align-self: flex-end;
+}
+
+.botMessage {
+  background-color: #e0e0e0;
+  color: black;
+  align-self: flex-start;
+}
+
+.inputContainer {
+  display: flex;
+  padding: 10px;
+  background-color: #f1f1f1;
+}
+
+.inputField {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.sendButton {
+  padding: 8px 12px;
+  margin-left: 10px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.sendButton:hover {
+  background-color: #0056b3;
+}
