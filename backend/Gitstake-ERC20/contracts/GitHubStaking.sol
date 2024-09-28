@@ -17,6 +17,7 @@ error GitHubStaking__CreatorRightsOnly();
 error GitHubStaking__WrongSolverError();
 error GitHubStaking__DeductionError();
 error GitHubStaking__NoWithdrawals();
+error GitHubStaking__NotEnoughETHSent();
 
 contract GitHubStaking {
     struct Stake {
@@ -96,6 +97,9 @@ contract GitHubStaking {
 
     uint private TOTAL_DEDUCTIONS = 0;
     uint private SOLD_TOKENS = 0;
+    uint private TOTAL_RAISED = 0;
+    uint private RATE = 0.003 ether;
+    uint private constant k = 0.000001 ether;
 
     IERC20 public s_token;
     address public immutable i_owner;
@@ -109,12 +113,30 @@ contract GitHubStaking {
         wallets[wallet].gitUsername = username;
     }
 
-    function requestTokens(address to, uint amt) external {
-        bool success = s_token.transfer(to, amt);
-        if (!success) {
-            revert GitHubStaking__UnsuccessfullTransfer(address(this), to);
+    function getCurrentPrice() public view returns (uint256) {
+        return RATE + k * (SOLD_TOKENS ** 2);
+    }
+
+    function getTotalRiased() external view returns (uint256) {
+        return TOTAL_RAISED;
+    }
+
+    function requestTokens(uint ethAmt) external payable {
+        uint256 tokenPrice = getCurrentPrice();
+        if (ethAmt <= tokenPrice) {
+            revert GitHubStaking__NotEnoughETHSent();
         }
-        SOLD_TOKENS = SOLD_TOKENS + amt;
+        uint256 tokenAmount = ethAmt / tokenPrice; // 1/0.001 = 1000
+
+        bool success = s_token.transfer(msg.sender, tokenAmount);
+        if (!success) {
+            revert GitHubStaking__UnsuccessfullTransfer(
+                address(this),
+                msg.sender
+            );
+        }
+        SOLD_TOKENS = SOLD_TOKENS + tokenAmount;
+        TOTAL_RAISED += ethAmt;
     }
 
     function createIssue(
