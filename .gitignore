@@ -1,36 +1,75 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
-/.pnp
-.pnp.js
-.yarn/install-state.gz
+/frontend/node_modules
+/frontend/.pnp
+/frontend/.pnp.js
+/frontend/.yarn/install-state.gz
 
 # testing
-/coverage
+/frontend/coverage
 
 # next.js
-/.next/
-/out/
+/frontend/.next/
+/frontend/out/
 
 # production
-/build
+/frontend/build
 
 # misc
-.DS_Store
-*.pem
+/.DS_Store
+/frontend/*.pem
 
 # debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+/frontend/npm-debug.log*
+/frontend/yarn-debug.log*
+/frontend/yarn-error.log*
 
 # local env files
-
+/frontend/.env
 
 # vercel
-.vercel
+/frontend/.vercel
 
 # typescript
-*.tsbuildinfo
-next-env.d.ts
+/frontend/*.tsbuildinfo
+/frontend/next-env.d.ts
+
+
+
+
+/backend/Gitstake-ERC20/.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+.yarn/
+.yarnrc.yml
+# Swap the comments on the following lines if you wish to use zero-installs
+# In that case, don't forget to run `yarn config set enableGlobalCache false`!
+# Documentation here: https://yarnpkg.com/features/caching#zero-installs
+
+#!.yarn/cache
+/backend/Gitstake-ERC20/.pnp.*
+
+/backend/Gitstake-ERC20/node_modules
+/backend/Gitstake-ERC20/.env
+
+/backend/Gitstake-ERC20/helper.txt
+# Hardhat files
+/backend/Gitstake-ERC20/cache
+/backend/Gitstake-ERC20/artifacts
+
+# TypeChain files
+/backend/Gitstake-ERC20/typechain
+/backend/Gitstake-ERC20/typechain-types
+
+# solidity-coverage files
+/backend/Gitstake-ERC20/coverage
+/backend/Gitstake-ERC20/coverage.json
+
+# Hardhat Ignition default folder for deployments against a local node
+/backend/Gitstake-ERC20/ignition/deployments/chain-31337
+
+/gas-analyzer-tool
