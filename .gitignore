@@ -54,6 +54,7 @@
 /backend/Gitstake-ERC20/.pnp.*
 
 /backend/Gitstake-ERC20/node_modules
+/frontend/node_modules
 /backend/Gitstake-ERC20/.env
 
 /backend/Gitstake-ERC20/helper.txt
